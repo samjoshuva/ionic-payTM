@@ -1,5 +1,7 @@
 {
   "name": "payTM-checkout",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
