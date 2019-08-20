@@ -27,11 +27,14 @@ export class HomePage {
             WEBSITE: 'APPSTAGING', // You would get this details from paytm after opening an account with them
             CALLBACK_URL:
                 'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=ORDER0000000001', // Callback url
-            // EMAIL: this.email, // Email of customer
-            MOBILE_NO: 8838558147 // Mobile no of customer
+            EMAIL: 'sam613263@gmail.com', // Email of customer
+            MOBILE_NO: 8838558147, // Mobile no of customer
+            CHECKSUMHASH:
+                'w2QDRMgp1/BNdEnJEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmGSt3Ddzw+oTaGCLneJwxFFq5mqTMwJXdQE2EzK4px2xruDqKZjHupz9yXev4='
         };
 
         this.platform.ready().then(() => {
+            console.log(navigator);
             paytm.startPayment(
                 options,
                 this.successCallback,
@@ -48,13 +51,13 @@ export class HomePage {
         } else {
             // error code will be available in RESPCODE
             // error list page https://docs.google.com/spreadsheets/d/1h63fSrAmEml3CYV-vBdHNErxjJjg8-YBSpNyZby6kkQ/edit#gid=2058248999
-            alert('Transaction Failed for reason ' + response.RESPMSG);
+            console.log(response);
         }
     }
 
     failureCallback(error) {
         // error code will be available in RESCODE
         // error list page https://docs.google.com/spreadsheets/d/1h63fSrAmEml3CYV-vBdHNErxjJjg8-YBSpNyZby6kkQ/edit#gid=2058248999
-        alert('Transaction Failed for reason ' + error.RESPMSG);
+        console.log(error);
     }
 }
