@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
         StatusBar,
         SplashScreen,
         InAppBrowser,
+        ThemeableBrowser,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

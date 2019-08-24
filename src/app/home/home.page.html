@@ -1,23 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Checkout
+      Payment
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-item>
-        <ion-input type="email" [(ngModel)]="email" placeholder="Enter Email address"></ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-input type="number" [(ngModel)]="number" placeholder="Enter Mobile Number"></ion-input>
-        </ion-item>
   <ion-item>
-    <ion-input type="number" [(ngModel)]="amount" placeholder="Enter amount"></ion-input>
+    <ion-input
+      type="number"
+      [(ngModel)]="amount"
+      placeholder="Enter amount"
+    ></ion-input>
   </ion-item>
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="block" (click)="pay()" color="success">Proceed for payment</ion-button>
+  <ion-button expand="block" (click)="pay()" color="success"
+    >Proceed for payment</ion-button
+  >
 </ion-footer>
