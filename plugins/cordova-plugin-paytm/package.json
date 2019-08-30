@@ -1,0 +1,73 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-paytm@0.0.10",
+      "/home/sam/Documents/GitHub/ionic-payTM"
+    ]
+  ],
+  "_from": "cordova-plugin-paytm@0.0.10",
+  "_id": "cordova-plugin-paytm@0.0.10",
+  "_inBundle": false,
+  "_integrity": "sha512-g4PPNtIS737ohjPZ/wCTjAo18hB3Bewyr89EISfvlMkh8FlkKYbKiFjB+umPhSm7uR+FD5P1lTwfiMigWLknIg==",
+  "_location": "/cordova-plugin-paytm",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-plugin-paytm@0.0.10",
+    "name": "cordova-plugin-paytm",
+    "escapedName": "cordova-plugin-paytm",
+    "rawSpec": "0.0.10",
+    "saveSpec": null,
+    "fetchSpec": "0.0.10"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-paytm/-/cordova-plugin-paytm-0.0.10.tgz",
+  "_spec": "0.0.10",
+  "_where": "/home/sam/Documents/GitHub/ionic-payTM",
+  "author": {
+    "name": "Arun Yokesh Kumar"
+  },
+  "bugs": {
+    "url": "https://github.com/ArunYogi/paytm-cordova-plugin/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-paytm",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "cordova_name": "PayTM",
+  "description": "This Plugin allows you to integrate PayTM application into a cordova app.",
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.2": {
+        "cordova": ">=3.4.0"
+      }
+    }
+  },
+  "homepage": "https://github.com/ArunYogi/paytm-cordova-plugin#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "PayTM",
+    "Payment",
+    "Gateway",
+    "Mobile"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-paytm",
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArunYogi/paytm-cordova-plugin.git"
+  },
+  "version": "0.0.10"
+}
