@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {
@@ -22,10 +22,13 @@ export class HomePage {
     number: Number;
     constructor(
         private router: Router,
-        private themeableBrowser: ThemeableBrowser
+        private themeableBrowser: ThemeableBrowser,
+        public alertController: AlertController,
+        private http: HttpClient,
+        public loadingController: LoadingController
     ) {}
 
-    pay() {
+    async pay() {
         if (this.amount == undefined) {
             alert('Amount cannot be empty');
             return;
@@ -35,27 +38,27 @@ export class HomePage {
         let txnRequest = {
             ENVIRONMENT: 'staging', // environment details. staging for test environment & production for live environment
             REQUEST_TYPE: 'DEFAULT', // You would get this details from paytm after opening an account with them
-            MID: 'endlnS53471586868878', // You would get this details from paytm after opening an account with them
+            MID: 'iXUagc49270122236852', // You would get this details from paytm after opening an account with them
             ORDER_ID: `ORDS${orderid}`, // Unique ID for each transaction. This info is for you to track the transaction details
             CUST_ID: '07', // Unique ID for your customer
             INDUSTRY_TYPE_ID: 'Retail', // You would get this details from paytm after opening an account with them
             CHANNEL_ID: 'WEB', // You would get this details from paytm after opening an account with them
             TXN_AMOUNT: this.amount, // Transaction amount that has to be collected
-            WEBSITE: 'APPSTAGING' // You would get this details from paytm after opening an account with them
+            WEBSITE: 'DEFAULT' // You would get this details from paytm after opening an account with them
         };
 
         const options: ThemeableBrowserOptions = {
             statusbar: {
-                color: '#f0f0f0'
+                color: '#eeeeee'
             },
             toolbar: {
-                height: 44,
-                color: '#f0f0f0'
+                height: 55,
+                color: '#eeeeee'
             },
             title: {
                 color: '#003264ff',
-
-                showPageTitle: true
+                staticText: 'Checkout'
+                // showPageTitle: true
             },
 
             closeButton: {
@@ -73,9 +76,59 @@ export class HomePage {
             options
         );
 
+        let loader = await this.presentLoading();
+        await loader.present();
         browser.on('closePressed').subscribe(res => {
             console.log('browser closed');
-            this.router.navigate(['/checkout', txnRequest.ORDER_ID]);
+
+            let headers: any = new HttpHeaders({
+                'Content-Type': 'application/json'
+            });
+            // this.router.navigate(['/checkout', txnRequest.ORDER_ID]);
+            this.http
+                .get(
+                    `https://php-paytm.herokuapp.com/TxnStatus.php?ORDER_ID=${txnRequest.ORDER_ID}`,
+                    { headers }
+                )
+                .subscribe(async data => {
+                    await loader.dismiss();
+                    this.presentAlertConfirm(
+                        txnRequest.ORDER_ID,
+                        data['STATUS'],
+                        data['RESPMSG']
+                    );
+                });
         });
+    }
+
+    async presentLoading() {
+        const loading = await this.loadingController.create({
+            message: 'Please wait while we process your transaction'
+        });
+        // await loading.present();
+
+        return loading;
+
+        // const { role, data } = await loading.onDidDismiss();
+
+        // console.log('Loading dismissed!');
+    }
+
+    async presentAlertConfirm(id, subtitle, message) {
+        const alert = await this.alertController.create({
+            header: id,
+            subHeader: subtitle,
+            message: message,
+            buttons: [
+                {
+                    text: 'Okay',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }
